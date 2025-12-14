@@ -19,6 +19,9 @@ from fastapi.staticfiles import StaticFiles
 import os
 from contextlib import asynccontextmanager
 from langchain_core.prompts import ChatPromptTemplate
+from langchain_mcp_adapters.client import MultiServerMCPClient
+from pathlib import Path
+
 
 """
 AsyncSqliteSaver persists the graph's state (including messages) in a SQLite database asynchronously.
@@ -51,42 +54,33 @@ class AgentState(TypedDict):
     intel_messages: Annotated[list, add_messages]
     logistics_messages: Annotated[list, add_messages]
 
-# Part 1: Calculator Tools
-async def multiply_tool(a: float, b: float) -> float:
-    """Multiplies two numbers.
-    Args:
-        a: The first number.
-        b: The second number.
-    Returns: The result of a multiplied by b.
-    """
+async def multiply(a: int, b: int) -> int:
+    """Multiply two integers a and b and return the result."""
     return a * b
 
-async def add_tool(a: float, b: float) -> float:
-    """Adds two numbers.
-    Args:
-        a: The first number.
-        b: The second number.
-    Returns: The result of a added to b.
-    """
-    return a + b
+async def logistic_agent(item: str) -> str:
+    """LLM-powered: Return information about a specific logistic item as a string."""
+    prompt = (
+        f"You are a logistics officer. "
+        f"Provide the current quantity and a short description for an {item}'. "
+        f"just make up something if you have to"
+        f"no markdown language or formatting or **, just plan text!! THIS IS VITAL"
+    )
+    llm = await get_llm()
+    response = await llm.ainvoke([HumanMessage(content=prompt)])
+    return response.content
 
-# Part 2: Dynamic Data Tool (Simulated)
-# In a real app, this would call a secure weather API.
-async def weather_tool(location: str) -> str:
-    """Returns the current weather information for a specific location.
-    Args:
-        location: The city or region to check the weather for.
-    Returns: A string containing the weather details (temperature, condition).
-    """
-    # Simulate an LLM or an API call for realistic context generation
-    if "Paris" in location:
-        return "18°C and partly cloudy. Expect light rain later."
-    else:
-        return f"Current conditions in {location}: 22°C and sunny."
-
-async def get_tools():
-    """Returns the list of available MCP tools."""
-    return [multiply_tool, add_tool, weather_tool]
+async def intel_agent(topic: str) -> str:
+    """LLM-powered: Generate a creative intelligence scenario as a string."""
+    prompt = (
+        f"You are an intelligence analyst. "
+        f"Create a realistic, detailed chronological bullet point scenario for: '{topic}'. "
+        f"Be concise and dont use military terminology. max 5 sentences"
+        f"no markdown language or formatting or **, just plan text!! THIS IS VITAL"
+    )
+    llm = await get_llm()
+    response = await llm.ainvoke([HumanMessage(content=prompt)])
+    return response.content
 
 async def get_llm():
     """Create and return the LLM instance using environment variables."""
@@ -100,11 +94,18 @@ async def get_llm():
     # Or use Ollama if needed
     # return ChatOllama(model="qwen3:8b")
 
+async def get_tools():
+    """Return tool functions bound to the LLM."""
+    return [
+        multiply, logistic_agent, intel_agent
+    ]
+
+
 async def setup_langgraph_app():
     """Setup the LangGraph app, model, tools, and graph. Returns the compiled app."""
     load_dotenv()
     llm = await get_llm()
-    tools = await get_tools()
+    tools = await get_tools() + await get_tools_external_mcp_agent()
     llm_with_tools = llm.bind_tools(tools=tools) # Connects tools to the AI
 
     # Define the prompt template for Rene, the commander agent
@@ -148,6 +149,76 @@ async def setup_langgraph_app():
     app = graph.compile(checkpointer=memory) # Puts all parts together
     return app # Returns the ready-to-use AI commander
 
+
+async def get_tools_external_mcp_agent():
+    """Load MCP tools from local and external servers"""
+    current_dir = Path(__file__).parent
+    print(f"Current directory: {current_dir}")
+    
+    # Define servers - mix of local and external
+    servers = {
+        
+        # Office Word MCP Server (using uv - no local installation needed)
+        "office_word": {
+            "command": "uv",
+            "args": ["tool", "run", "--from", "office-word-mcp-server", "word_mcp_server"],
+            "transport": "stdio",
+        },
+        
+       "git": {
+            "command": "uvx",
+            "args": [
+                "mcp-server-git"
+            ],
+            "transport": "stdio"
+        },
+       
+       "filesystem": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-filesystem",
+                str(current_dir)
+            ],
+            "transport": "stdio"
+        },
+       
+       "blender": {
+          "command": "uvx",
+           "args": [
+               "blender-mcp"
+           ],
+           "transport": "stdio"
+        },
+       
+        "firecrawl-mcp": {
+          "command": "npx",
+          "args": [
+             "-y",
+             "firecrawl-mcp"
+            ],
+           "env": {
+              "FIRECRAWL_API_KEY": "fc-e0b2b8dcc101460a8cbf815d808b07c5"
+            },
+            "transport": "stdio"
+        }
+               
+}
+    
+    try:
+        client = MultiServerMCPClient(servers)
+        tools = await client.get_tools()
+        
+        print(f"Loaded {len(tools)} tools from MCP servers:")
+        for tool in tools:
+            print(f"  - {tool.name}: {tool.description}")
+        
+        return tools
+        
+    except Exception as e:
+        print(f"Error connecting to external servers: {e}")
+        print("Note: External servers may require API keys or may be unavailable")
+        return None
 
 
 @app_instance.post("/chat")
