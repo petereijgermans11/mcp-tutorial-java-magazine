@@ -1,0 +1,112 @@
+FastMCP Flow (server-code-explorer.py - Code Explorer Server)
+=============================================================
+
+ARCHITECTURE: Native HTTP MCP Server
+
+┌─────────────────────────────────────────────────────────┐
+│ Your Local Machine                                      │
+│                                                         │
+│  ┌────────────────────────────────────────┐             │
+│  │ MultiServerMCPClient (LangGraph)       │             │
+│  │                                        │             │
+│  │ "Hey, call list_all_files()"           │             │
+│  └───────────────┬────────────────────────┘             │
+│                  │ HTTP POST                            │
+│                  │ to http://localhost:8001/            │
+│                  │                                      │
+│                  │ {                                    │
+│                  │   "jsonrpc": "2.0",                  │
+│                  │   "id": 1,                           │
+│                  │   "method": "tools/call",            │
+│                  │   "params": {                        │
+│                  │     "name": "list_all_files",        │
+│                  │     "arguments": {                   │
+│                  │       "folder": "src/langgraph_mcp"  │
+│                  │     }                                │
+│                  │   }                                  │
+│                  │ }                                    │
+└──────────────────┼──────────────────────────────────────┘
+                   │
+                   ↓ (local or over internet if deployed)
+                   │
+┌──────────────────┼──────────────────────────────────────┐
+│ server-code-explorer.py                                 │
+│                  ↓                                      │
+│  ┌────────────────────────────────────────┐             │
+│  │ FastMCP Server (Python)                │             │
+│  │                                        │             │
+│  │ @mcp.tool()                            │             │
+│  │ def list_all_files(folder: str) -> str:│             │
+│  │     target = _normalize_path(folder)   │             │
+│  │     _validate_path(target)  # Security │             │
+│  │     # Build tree structure             │             │
+│  │     result = f"{folder}/\n"            │             │
+│  │     result += "├── file1.py\n"         │             │
+│  │     result += "└── file2.py"           │             │
+│  │     return result                      │             │
+│  │                                        │             │ 
+│  │ # all functions stored inside registry │             │
+│  │ Tool Registry (internal dict):         │             │
+│  │ {                                      │             │
+│  │   "list_all_files": <function>,        │             │
+│  │   "list_python_files": <function>,     │             │
+│  │   "show_functions": <function>,        │             │
+│  │   "read_function": <function>          │             │
+│  │ }                                      │             │
+│  │                                        │             │
+│  │ 1. FastMCP receives HTTP POST          │             │
+│  │ 2. Parses JSON-RPC request             │             │
+│  │ 3. Looks up "list_all_files" in        │             │
+│  │    tool registry (dict lookup)         │             │
+│  │ 4. Calls function from registry:       │             │
+│  │    registry["list_all_files"](folder)  │             │
+│  │ 5. Gets return value (tree format)     │             │
+│  │ 6. Wraps in JSON-RPC response          │             │
+│  │ 7. Returns HTTP response               │             │
+│  └───────────────┬────────────────────────┘             │
+│                  │ HTTP 200 OK                          │
+│                  │                                      │
+│                  │ {                                    │
+│                  │   "jsonrpc": "2.0",                  │
+│                  │   "id": 1,                           │
+│                  │   "result": {                        │
+│                  │     "content": [{"text": "src/...\n  │
+│                  │                    ├── file1.py\n    │
+│                  │                    └── file2.py"}]   │
+│                  │   }                                  │
+│                  │ }                                    │
+└──────────────────┼──────────────────────────────────────┘
+                   │
+                   ↓
+                   │
+┌──────────────────┼──────────────────────────────────────┐
+│ Your Local Machine                                      │
+│                  ↓                                      │
+│  ┌────────────────────────────────────────┐             │
+│  │ MultiServerMCPClient                   │             │
+│  │ "Got file tree structure"              │             │
+│  │ → Passes to LangGraph agent            │             │
+│  │ → LLM displays tree EXACTLY as received│             │
+│  └────────────────────────────────────────┘             │
+└─────────────────────────────────────────────────────────┘
+
+
+CODE EXPLORER TOOLS:
+===================
+
+1. list_all_files(folder)
+   → Returns tree structure (├── └── format)
+   → Security: Validates path is within REPO_ROOT
+
+2. list_python_files(folder)
+   → Filters to .py files only
+
+3. show_functions(file_path)
+   → Lists all functions in a Python file
+   → Returns: "function_name() at line X"
+
+4. read_function(file_path, function_name)
+   → Gets complete source code of a function
+   → Includes function definition and body
+
+

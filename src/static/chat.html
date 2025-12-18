@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LangGraph Chatbot</title>
+    <link rel="stylesheet" href="chat.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap">
+</head>
+<body>
+    <div class="container" id="container">
+        <aside class="sidebar" id="sidebar">
+            <div class="top-bar" id="sidebar-top-bar">
+                <img class="logo" src="img/Logo.svg" alt="Logo" />
+            </div>
+            <div class="functions" id="sidebar-functions">
+                <button class="function-button" id="new-chat-btn"><span class="material-symbols-rounded">edit_square</span>New
+                    Chat</button>
+            </div>
+            <div class="chat-history" id="sidebar-chat-history">
+                <!-- Chat history will be dynamically populated here -->
+            </div>
+            </aside>
+            <main class="main" id="main">
+                <div class="top-bar" id="main-top-bar">
+                    <h1>Chatbot</h1>
+                </div>
+            <div class="chat" id="chat-window"></div>
+            <div class="input-area" id="input-area">
+                <textarea class="input" id="user-input" placeholder="Type your message..." autofocus rows="1"></textarea>
+                <button class="material-symbols-rounded submit-button" id="send-btn">input_circle</button>
+            </div>
+        </main>
+    </div>
+    <img class="blob" id="top-blob" src="img/top-blob.svg" alt="Decorative Blob" />
+    <img class="blob" id="bottom-blob" src="img/bottom-blob.svg" alt="Decorative Blob" />
+    <script src="chat.js"></script>
+</body>
+</html>

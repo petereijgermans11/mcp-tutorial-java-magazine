@@ -1,29 +1,34 @@
 [project]
-name = "defensie-casus"
+name = "poetry-langgraph-mcp"
 version = "0.1.0"
-description = "Add your description here"
-readme = "README.md"
-requires-python = ">=3.12"
-dependencies = [
-    "aiosqlite==0.22.0",
-    "chromadb>=1.0.12",
-    "dotenv>=0.9.9",
-    "fastapi==0.125.0",
-    "fastmcp==2.14.1",
-    "ipykernel>=6.29.5",
-    "langchain-community>=0.3.24",
-    "langchain-core==1.2.2",
-    "langchain-mcp-adapters==0.2.1",
-    "langchain-ollama==1.0.1",
-    "langchain-openai==1.1.6",
-    "langgraph==1.0.5",
-    "langgraph-checkpoint-sqlite>=2.0.10",
-    "pipreqs>=0.5.0",
-    "pydantic==2.12.5",
-    "python-dotenv==1.2.1",
-    "python-multipart>=0.0.20",
-    "rich==14.2.0",
-    "ruff>=0.11.12",
-    "sentence-transformers>=4.1.0",
-    "uvicorn>=0.34.3",
+description = ""
+authors = [
+    {name = "DiegoLigtenberg",email = "diegoligtenberg@gmail.com"}
 ]
+license = {text = "mit"}
+readme = "README.md"
+requires-python = ">=3.12,<4.0"
+dependencies = [
+    "mcp (>=1.13.1,<2.0.0)",
+    "langgraph (>=0.6.6,<0.7.0)",
+    "dotenv (>=0.9.9,<0.10.0)",
+    "langchain-ollama (>=0.3.7,<0.4.0)",
+    "langchain-openai (>=0.3.32,<0.4.0)",
+    "langchain-mcp-adapters (>=0.1.9,<0.2.0)",
+    "rich (>=14.1.0,<15.0.0)",
+    "ruff (>=0.12.12,<0.13.0)",
+    "fastapi (>=0.116.2,<0.117.0)",
+    "uvicorn (>=0.35.0,<0.36.0)",
+    "python-multipart (>=0.0.20,<0.0.21)",
+    "fastmcp (>=2.13.0.2,<3.0.0.0)",
+]
+
+[tool.poetry]
+packages = [{include = "langgraph_mcp", from = "src"}]
+
+[tool.poetry.group.dev.dependencies]
+black = "^25.9.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

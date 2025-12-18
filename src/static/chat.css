@@ -1,0 +1,285 @@
+:root {
+  /* Base color palette */
+  --color-bright-100: rgba(248, 248, 248, 1);
+  --color-bright-80: rgba(248, 248, 248, 0.8);
+  --color-bright-60: rgba(248, 248, 248, 0.6);
+  --color-bright-40: rgba(248, 248, 248, 0.4);
+  --color-bright-20: rgba(248, 248, 248, 0.2);
+  --color-dark-100: rgba(24, 24, 24, 1);
+  --color-dark-80: rgba(24, 24, 24, 0.8);
+  --color-dark-60: rgba(24, 24, 24, 0.6);
+  --color-dark-40: rgba(24, 24, 24, 0.4);
+  --color-dark-20: rgba(24, 24, 24, 0.2);
+  --color-brand-orange: rgba(244, 130, 31, 1);
+  --color-brand-red: rgba(218, 32, 45, 1);
+  --color-brand-purple: rgba(137, 39, 144, 1);
+  --color-brand-darkpurple: rgba(98, 12, 115, 1);
+
+  --gradient-brand: linear-gradient(90deg, var(--color-brand-orange) 0%, var(--color-brand-red) 40%, var(--color-brand-purple) 85%, var(--color-brand-darkpurple) 100%);
+  --gradient-glass: linear-gradient(135deg, var(--color-bright-40) 0%, var(--color-bright-100) 50%, var(--color-bright-40) 100%);
+
+  --font-chat: 16px/1.5 'Segoe UI', Arial, sans-serif;
+  --font-system: 14px 'Segoe UI', Arial, sans-serif;
+  --font-interactive: 16px 'Segoe UI', Arial, sans-serif;
+
+  /* Theme variables - Light mode defaults */
+  --bg-primary: var(--color-bright-100);
+  --bg-secondary: var(--color-bright-80);
+  --bg-tertiary: var(--color-bright-40);
+  --bg-input: var(--color-dark-20);
+  --bg-button: var(--color-dark-20);
+  --bg-button-hover: var(--color-dark-40);
+  --bg-user-message: var(--color-dark-20);
+  --bg-ai-message: var(--color-bright-100);
+
+  --text-primary: var(--color-dark-100);
+  --text-secondary: var(--color-dark-40);
+
+  --border-primary: var(--color-dark-40);
+  --border-secondary: var(--color-dark-20);
+}
+
+body.dark {
+  /* Theme variables - Dark mode overrides */
+  --bg-primary: var(--color-dark-100);
+  --bg-secondary: var(--color-dark-80);
+  --bg-tertiary: var(--color-dark-60);
+  --bg-input: var(--color-bright-20);
+  --bg-button: var(--color-bright-20);
+  --bg-button-hover: var(--color-bright-40);
+  --bg-user-message: var(--color-bright-20);
+  --bg-ai-message: var(--color-dark-100);
+
+  --text-primary: var(--color-bright-100);
+  --text-secondary: var(--color-bright-40);
+
+  --border-primary: var(--color-bright-40);
+  --border-secondary: var(--color-bright-20);
+}
+
+body.dark .main {
+  background: rgba(128, 128, 128, 0.25);
+  backdrop-filter: blur(10px);
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: var(--bg-primary);
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  backdrop-filter: blur(20px);
+}
+
+.sidebar {
+  width: 300px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-secondary);
+  border-right: 1px solid var(--border-primary);
+}
+
+.top-bar {
+  height: 72px;
+  width: 100%;
+  padding: 24px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.functions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+}
+
+.function-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  color: var(--text-primary);
+  border: none;
+  cursor: pointer;
+  background: transparent;
+}
+
+.function-button:hover {
+  padding: 4px;
+  background-color: var(--bg-button-hover);
+  border-radius: 8px;
+}
+
+.function-button:active {
+  background-color: var(--bg-button-hover);
+  border: 1px solid var(--border-secondary);
+  border-radius: 8px;
+}
+
+.chat-history {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+}
+
+#dark-mode-btn {
+  justify-self: flex-end;
+  padding: 8px;
+  background-color: var(--bg-button);
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  position: relative;
+  background-color: var(--bg-tertiary);
+  overflow-y: auto;
+}
+
+.chat {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 24px;
+}
+
+.message {
+  max-width: 60%;
+  word-break: break-word;
+}
+
+.message.user {
+  padding: 16px;
+  align-self: flex-end;
+  border: 1px solid var(--border-primary);
+  border-radius: 16px 0 16px 16px;
+  background: var(--bg-user-message);
+  color: var(--text-primary);
+  font: var(--font-chat);
+}
+
+.message.ai {
+  padding: 12px;
+  align-self: flex-start;
+  color: var(--text-primary);
+  font: var(--font-chat);
+}
+
+.message a {
+  color: #0066cc;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.message a:hover {
+  color: #0052a3;
+}
+
+body.dark .message a {
+  color: #3399ff;
+}
+
+body.dark .message a:hover {
+  color: #66b3ff;
+}
+
+.message.tool {
+  max-width: 40%;
+  align-self: flex-start;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: rgba(244, 130, 31, 0.15);
+  border: 1px solid rgba(244, 130, 31, 0.3);
+  color: rgba(244, 130, 31, 0.95);
+  /* color: var(--text-secondary); //uncomment this to use the grey mode color for the tool messages */
+  font: var(--font-system);
+  font-weight: 500;
+}
+
+body.dark .message.tool {
+  background: rgba(244, 130, 31, 0.2);
+  border: 1px solid rgba(244, 130, 31, 0.4);
+  color: rgba(255, 200, 100, 0.95);
+}
+
+.input-area {
+  min-height: 64px;
+  width: 100%;
+  max-width: 600px;
+  min-width: 300px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-primary);
+  border-radius: 32px;
+  box-sizing: border-box;
+  backdrop-filter: blur(20px);
+}
+
+.input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  color: var(--text-primary);
+  font: var(--font-interactive);
+  resize: none;
+  overflow-y: hidden;
+  min-height: 24px;
+  max-height: 200px;
+}
+
+.input::placeholder {
+  color: var(--text-primary);
+}
+
+.input:focus {
+  outline: none;
+}
+
+.submit-button {
+  padding: 8px;
+  color: var(--text-primary);
+  background-color: var(--bg-button);
+  border: 1px solid var(--border-primary);
+  border-radius: 24px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: var(--bg-button-hover);
+}
+
+#top-blob {
+  position: absolute;
+  top: 0;
+  left: 95px;
+  z-index: -1;
+}
+
+#bottom-blob {
+  position: absolute;
+  bottom: 0;
+  left: 160px;
+  z-index: -1;
+}
