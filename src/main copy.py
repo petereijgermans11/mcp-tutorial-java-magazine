@@ -158,39 +158,6 @@ async def get_tools_external_mcp_agent():
     # Define servers - mix of local and external
     servers = {
         
-        # Office Word MCP Server (using uv - no local installation needed)
-        "office_word": {
-            "command": "uv",
-            "args": ["tool", "run", "--from", "office-word-mcp-server", "word_mcp_server"],
-            "transport": "stdio",
-        },
-        
-       "git": {
-            "command": "uvx",
-            "args": [
-                "mcp-server-git"
-            ],
-            "transport": "stdio"
-        },
-       
-       "filesystem": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "@modelcontextprotocol/server-filesystem",
-                str(current_dir)
-            ],
-            "transport": "stdio"
-        },
-       
-       "blender": {
-          "command": "uvx",
-           "args": [
-               "blender-mcp"
-           ],
-           "transport": "stdio"
-        },
-       
         "firecrawl-mcp": {
           "command": "npx",
           "args": [
@@ -201,7 +168,41 @@ async def get_tools_external_mcp_agent():
               "FIRECRAWL_API_KEY": "fc-e0b2b8dcc101460a8cbf815d808b07c5"
             },
             "transport": "stdio"
-        }
+        },
+        
+        # Office Word MCP Server (using uv - no local installation needed)
+        "office_word": {
+            "command": "uv",
+            "args": ["tool", "run", "--from", "office-word-mcp-server", "word_mcp_server"],
+            "transport": "stdio",
+        },
+        
+        "ppt": {
+            "command": "uv",
+            "args": ["tool", "run", "--from", "office-powerpoint-mcp-server", "ppt_mcp_server"],
+            "transport": "stdio",
+        },
+        
+        "git": {
+            "command": "uvx",
+            "args": [
+                "mcp-server-git"
+            ],
+            "transport": "stdio"
+        },
+       
+        "filesystem": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-filesystem",
+                str(current_dir)
+            ],
+            "transport": "stdio"
+        },
+    
+       
+       
                
 }
     

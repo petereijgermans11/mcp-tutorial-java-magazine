@@ -8,6 +8,14 @@ from langchain_openai import AzureChatOpenAI
 from langchain_ollama import ChatOllama
 from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
 import aiosqlite
+
+# Add is_alive() method to aiosqlite.Connection for langgraph compatibility
+if not hasattr(aiosqlite.Connection, 'is_alive'):
+    def is_alive(self):
+        """Check if connection is alive - compatibility method for langgraph."""
+        return True  # Connection is alive if object exists
+    aiosqlite.Connection.is_alive = is_alive
+
 from src.configuration import *
 from pydantic import BaseModel
 import uuid
@@ -33,8 +41,11 @@ Use the same thread_id to continue a conversation after restarting the script.
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    app.state.langgraph_app = await setup_langgraph_app()
-    yield
+    # Use AsyncSqliteSaver.from_conn_string as context manager for proper connection management
+    async with AsyncSqliteSaver.from_conn_string("checkpoint_06.sqlite") as memory:
+        app.state.memory = memory
+        app.state.langgraph_app = await setup_langgraph_app(memory)
+        yield
 
 app_instance = FastAPI(lifespan=lifespan)
 
@@ -101,7 +112,7 @@ async def get_tools():
     ]
 
 
-async def setup_langgraph_app():
+async def setup_langgraph_app(memory: AsyncSqliteSaver):
     """Setup the LangGraph app, model, tools, and graph. Returns the compiled app."""
     load_dotenv()
     llm = await get_llm()
@@ -144,8 +155,6 @@ async def setup_langgraph_app():
     graph.add_conditional_edges("model", tools_router) # Decides to use tools or not
     graph.add_edge("tool_node", "model") # After tools, go back to thinking
 
-    conn = await aiosqlite.connect("checkpoint_06.sqlite") # Creates database
-    memory = AsyncSqliteSaver(conn=conn) #  Makes workflow remember conversations
     app = graph.compile(checkpointer=memory) # Puts all parts together
     return app # Returns the ready-to-use AI commander
 

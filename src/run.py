@@ -6,7 +6,7 @@ cmd = [
     sys.executable, "-m", "uvicorn",
     "src.main:app_instance",
     "--reload",
-    "--port", "8000"
+    "--port", "8003"
 ]
  
 
