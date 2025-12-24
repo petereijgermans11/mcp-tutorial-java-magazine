@@ -3,7 +3,7 @@ name = "poetry-langgraph-mcp"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "DiegoLigtenberg",email = "diegoligtenberg@gmail.com"}
+    {name = "Peter Eijgermans",email = "p.eijgermans11@gmail.com"}
 ]
 license = {text = "mit"}
 readme = "README.md"

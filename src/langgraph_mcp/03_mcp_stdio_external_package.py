@@ -3,6 +3,7 @@ from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 import os
 from contextlib import asynccontextmanager
+from langchain_core.messages import SystemMessage
 from pathlib import Path
 from langgraph.graph import StateGraph, START
 from langgraph.prebuilt import tools_condition, ToolNode
@@ -43,9 +44,34 @@ class MessageState(BaseModel):
 
 def create_assistant(llm_with_tools):
     """Create an assistant function with access to the LLM"""
+    system_prompt = SystemMessage(
+        content="""
+            
+                You are an Efficiency-Oriented Research Agent.
+
+1. FIRECRAWL STRATEGY:
+   - ALWAYS use 'search' (never 'crawl') for AI trends.
+   - LIMIT results to 2 items (limit: 2).
+   - SET maxDepth: 1.
+   - Summarize findings into the existing '/Users/petereijgermans/Desktop/mcp-tutorial-java-magazine/research_notes.md' file immediately after searching.
+
+2. POWERPOINT STRATEGY:
+   - Use the ABSOLUTE PATH for the template: '/Users/petereijgermans/Desktop/mcp-tutorial-java-magazine/Future_of_tech.pptx'.
+   - FOLLOW THIS SEQUENCE: 
+     a) create_presentation_from_template (using the path above).
+     b) add_slide (using the ID returned).
+     c) save_presentation (to finalize the file).
+   - If 'create_presentation_from_template' fails, DO NOT try 'auto_generate'. Stop and report the path error.
+
+3. WORKFLOW:
+   - Do not summarize for the user between steps. Proceed directly from Research -> MD Update -> PPT Generation -> Git Commit.
+                """
+    )
+
 
     async def assistant(state: MessageState):
         messages = truncate_messages_safely(state.messages)
+        messages = [system_prompt] + messages
         response = await llm_with_tools.ainvoke(messages)
         return {"messages": [response]}
 
@@ -86,6 +112,7 @@ async def validate_servers(all_servers):
 async def setup_langgraph_app():
     """Setup the LangGraph app with MCP tools"""
     current_dir = Path(__file__).parent
+    firecrawl_api_key = os.getenv("FIRECRAWL_API_KEY")
 
     # Define all MCP servers (local + external packages)
     all_servers = {
@@ -109,17 +136,12 @@ async def setup_langgraph_app():
              "firecrawl-mcp"
             ],
            "env": {
-              "FIRECRAWL_API_KEY": "fc-e0b2b8dcc101460a8cbf815d808b07c5"
+              "FIRECRAWL_API_KEY": firecrawl_api_key
             },
             "transport": "stdio"
         },
         
-        # Office Word MCP Server (using uv - no local installation needed)
-        "office_word": {
-            "command": "uv",
-            "args": ["tool", "run", "--from", "office-word-mcp-server", "word_mcp_server"],
-            "transport": "stdio",
-        },
+       
         
         "ppt": {
             "command": "uv",
@@ -134,16 +156,9 @@ async def setup_langgraph_app():
             ],
             "transport": "stdio"
         },
-       
-        "filesystem": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "@modelcontextprotocol/server-filesystem",
-                str(current_dir)
-            ],
-            "transport": "stdio"
-        },
+        
+        
+    
     }
 
     # Validate servers - only load ones that work
