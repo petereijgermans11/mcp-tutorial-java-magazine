@@ -55,8 +55,7 @@ def create_assistant(llm_with_tools):
    - SET maxDepth: 1.
    - Summarize findings into the existing '/Users/petereijgermans/Desktop/mcp-tutorial-java-magazine/research_notes.md' file immediately after searching.
 
-2. POWERPOINT STRATEGY:
-   - Use the ABSOLUTE PATH for the template: '/Users/petereijgermans/Desktop/mcp-tutorial-java-magazine/Future_of_tech.pptx'.
+. POWERPOINT STRATEGY:
    - FOLLOW THIS SEQUENCE: 
      a) create_presentation_from_template (using the path above).
      b) add_slide (using the ID returned).
