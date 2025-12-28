@@ -1,64 +1,97 @@
 ---
-theme: seriph
-background: https://source.unsplash.com/collection/94734566/1920x1080
-class: text-center
+theme: serif
+background: https://source.unsplash.com/featured/?technology
 highlighter: shiki
+title: AI Trends 2025
 ---
 
 # AI Trends 2025
 
-Exploring the latest advancements transforming AI this year
-
----
-layout: section
 ---
 
 # Table of Contents
-1. AI Agents: Complex reasoning and planning
-2. Inference Time Compute: Real-time reasoning
-3. Large and Small Models
-4. Advanced AI Use Cases
-5. Near Infinite AI Memory
-6. Human-in-the-loop Augmentation
+1. **The State of AI: Global Survey 2025 - McKinsey**
+2. **6 AI Trends You'll See More Of In 2025 - Microsoft Source**
+3. **AI Trends for 2025 - YouTube (IBM)**
+4. AI agents performing complex reasoning and planning are gaining traction.
+5. Inference time compute enhancing real-time thinking and reasoning without retraining models.
+6. Emergence of extremely large parameters models (50 trillion) and small models for specific tasks on local devices.
+7. Advanced use cases for AI such as proactive optimization and solving complex customer service queries.
+8. AI models offering near infinite memory for continuous knowledge accumulation.
+9. Human-in-the-loop augmentation enhancing integration between humans and AI tasks for better synergy.
 
 ---
-layout: default
+layout: section
+
+# The State of AI: Global Survey 2025 - McKinsey
+
 ---
 
-# AI Agents: Complex Reasoning and Planning
+# The State of AI: Global Survey 2025 - McKinsey
+   - Almost all organizations use AI but are in the early implementation and scaling stages.
+   - AI agents emerge as a focus area, with 62% experimenting and 23% scaling.
+   - High performers leverage AI for growth, innovation, and process transformation.
+   - Workforce impact: AI adoption leads to mixed outcomes on overall employment.
+   - Challenges include scaling adoption and mitigating AI risks like data inaccuracy.
+
+---
+layout: fact
+
+# 6 AI Trends You'll See More Of In 2025 - Microsoft Source
+
+   - AI models will evolve with enhanced reasoning and better efficiency.
+   - AI agents envisioned to automate tasks in enterprise and home settings.
+   - AI companions tailored for everyday personalized support.
+   - Resource-efficient datacenters to support sustainable AI infrastructure.
+   - AI to accelerate scientific discoveries, solving complex biomolecular challenges.
+
+---
+layout: fact
+
+# AI Trends for 2025 - YouTube (IBM)
+
+   - Eight predicted AI trends for 2025:
+     - Agentic AI: systems reasoning and acting autonomously.
+     - Inference Compute: dynamic "thinking" during real-time data processing.
+     - Very Large Models: expanding into 50 trillion parameters.
+     - Small Models: compact AI for domain-specific uses.
+     - Advanced Use Cases: expanding AI into more sophisticated applications.
+     - Nearly Infinite Memory: AI chatbots recall interactions persistently.
+     - Human-AI Augmentation: optimizing collaborative workflows.
+     - Ethical AI practices and frameworks for responsible advancement.
+
+---
+
+# AI agents performing complex reasoning and planning are gaining traction.
+
 AI agents performing complex reasoning and planning are gaining traction.
 
 ---
-layout: default
----
 
-# Inference Time Compute: Real-Time Reasoning
+# Inference time compute enhancing real-time thinking and reasoning without retraining models.
+
 Inference time compute enhancing real-time thinking and reasoning without retraining models.
 
 ---
-layout: default
----
 
-# Large and Small Models
+# Emergence of extremely large parameters models (50 trillion) and small models for specific tasks on local devices.
+
 Emergence of extremely large parameters models (50 trillion) and small models for specific tasks on local devices.
 
 ---
-layout: default
----
 
-# Advanced AI Use Cases
+# Advanced use cases for AI such as proactive optimization and solving complex customer service queries.
+
 Advanced use cases for AI such as proactive optimization and solving complex customer service queries.
 
 ---
-layout: default
----
 
-# Near Infinite AI Memory
+# AI models offering near infinite memory for continuous knowledge accumulation.
+
 AI models offering near infinite memory for continuous knowledge accumulation.
 
 ---
-layout: default
----
 
-# Human-in-the-loop Augmentation
+# Human-in-the-loop augmentation enhancing integration between humans and AI tasks for better synergy.
+
 Human-in-the-loop augmentation enhancing integration between humans and AI tasks for better synergy.
