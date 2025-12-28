@@ -8,7 +8,7 @@ background: https://cover.sli.dev
 title: Welcome to Slidev
 info: |
   ## Slidev Starter Template
-  Reviewing AI innovations for adoption or assessment.
+  Exploring cutting-edge advancements in AI technology.
 
   Learn more at [Sli.dev](https://sli.dev)
 # apply UnoCSS classes to the current slide
@@ -24,7 +24,7 @@ mdc: true
 duration: 35min
 ---
 
-# 2025 AI Trends Assessment
+# Latest AI Trends of 2025
 
 Presentation slides for developers
 
@@ -46,8 +46,12 @@ The last comment block of each slide will be treated as slide notes. It will be 
 -->
 
 ---
-transition: fade-out
+layout: section
 ---
+# Highlights of AI Insights
+- AI transforming real-world applications (transport, healthcare, climate solutions).
+- Generative AI propelling productivity enhancements (Stanford, Microsoft).
+- Evaluating AI agents driving eco AI models w/focus ultra-efficient Copilot vision;.
 
 # What is Slidev?
 

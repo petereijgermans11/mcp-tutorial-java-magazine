@@ -1,25 +1,21 @@
 # Research Notes: AI Trends 2025
 
-## McKinsey Global Survey - AI Trends
+## Stanford AI Index Report Key Highlights:
+1. AI performance on benchmarks sharply improves.
+2. Increase in AI applications across healthcare and transportation.
+3. Record private investment in generative AI, boosting productivity.
+4. USA leads AI model development; China closes performance gaps.
+5. Governments intensify AI regulation and clean-energy efforts.
 
-1. Increasing deployment of AI agents while scaling remains limited.
-2. EBIT improvements observed in marketing and sales, corporate finance, product design sectors.
-3. AI-driven redesign of business workflows crucial for enterprise success.
-4. Larger organizations lead in scaled adoption.
-
-Source: [McKinsey State of AI 2025 Survey](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai)
-
----
-
-## Stanford AI Index Report Highlights
-
-1. Current progress closing model performance gaps between China and US AI technology experts.
-2. Improved small-model efficiency reducing compute associated bottlenecks.
-3. Multi-regional governments steps enhancing AI legislation.
-4. Rise in education readiness gaps expanding focus on CS literacy pathways necessary alignment future.
-
-Source [Explore Full Trends Stanford AI Index Scope Directly Link](https://hai.stanford.edu/ai-index-horizons).
+Source: [Stanford AI Index Report](https://hai.stanford.edu/ai-index/2025-ai-index-report)
 
 ---
 
-## Video Extract key actionable adopt listening (YouTube)”
+## Microsoft Article Insights on AI for 2025:
+1. Intelligent agents revolutionize workflows (via Microsoft Copilot).
+2. AI optimizing memory and emotional intelligence.
+3. Eco-friendly AI hardware driven by custom models (e.g., Microsoft's Orca).
+4. Customizable AI applications confront data hallucination risks.
+5. AI enabling breakthroughs in science.
+
+Source: [Microsoft AI Trends 2025](https://news.microsoft.com/source/features/ai/6-ai-trends-youll-see-more-of-in-2025/)
