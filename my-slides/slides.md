@@ -1,5 +1,5 @@
 ---
-theme: serif
+theme: '@slidev/theme-seriph'
 background: https://source.unsplash.com/featured/?technology
 highlighter: shiki
 title: AI Trends 2025
@@ -22,6 +22,7 @@ title: AI Trends 2025
 
 ---
 layout: section
+---
 
 # The State of AI: Global Survey 2025 - McKinsey
 
@@ -35,30 +36,33 @@ layout: section
    - Challenges include scaling adoption and mitigating AI risks like data inaccuracy.
 
 ---
-layout: fact
+layout: default
+---
 
 # 6 AI Trends You'll See More Of In 2025 - Microsoft Source
 
-   - AI models will evolve with enhanced reasoning and better efficiency.
-   - AI agents envisioned to automate tasks in enterprise and home settings.
-   - AI companions tailored for everyday personalized support.
-   - Resource-efficient datacenters to support sustainable AI infrastructure.
-   - AI to accelerate scientific discoveries, solving complex biomolecular challenges.
+- AI models will evolve with enhanced reasoning and better efficiency.
+- AI agents envisioned to automate tasks in enterprise and home settings.
+- AI companions tailored for everyday personalized support.
+- Resource-efficient datacenters to support sustainable AI infrastructure.
+- AI to accelerate scientific discoveries, solving complex biomolecular challenges.
 
 ---
-layout: fact
+layout: default
+---
 
 # AI Trends for 2025 - YouTube (IBM)
 
-   - Eight predicted AI trends for 2025:
-     - Agentic AI: systems reasoning and acting autonomously.
-     - Inference Compute: dynamic "thinking" during real-time data processing.
-     - Very Large Models: expanding into 50 trillion parameters.
-     - Small Models: compact AI for domain-specific uses.
-     - Advanced Use Cases: expanding AI into more sophisticated applications.
-     - Nearly Infinite Memory: AI chatbots recall interactions persistently.
-     - Human-AI Augmentation: optimizing collaborative workflows.
-     - Ethical AI practices and frameworks for responsible advancement.
+Eight predicted AI trends for 2025:
+
+- **Agentic AI**: systems reasoning and acting autonomously.
+- **Inference Compute**: dynamic "thinking" during real-time data processing.
+- **Very Large Models**: expanding into 50 trillion parameters.
+- **Small Models**: compact AI for domain-specific uses.
+- **Advanced Use Cases**: expanding AI into more sophisticated applications.
+- **Nearly Infinite Memory**: AI chatbots recall interactions persistently.
+- **Human-AI Augmentation**: optimizing collaborative workflows.
+- **Ethical AI practices** and frameworks for responsible advancement.
 
 ---
 
