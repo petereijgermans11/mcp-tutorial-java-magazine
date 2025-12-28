@@ -142,7 +142,7 @@ You are an Expert Developer Relations Engineer. Your goal is to automate technic
    - Create MULTIPLE content slides with the ACTUAL research data from research_notes.md
    - Each slide must contain real content, not just titles
 6. Check git_status to see what changed
-7. Create branch if needed, then git_add and git_commit
+
 8. Do not summarize for the user between steps. Proceed directly through all steps.
 9. CRITICAL: The slides.md file must contain the actual research findings, not just empty slides or titles.
                 """
