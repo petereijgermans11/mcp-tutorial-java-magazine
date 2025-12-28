@@ -1,21 +1,8 @@
-# Research Notes: AI Trends 2025
+## Latest AI Trends in 2025:
 
-## Stanford AI Index Report Key Highlights:
-1. AI performance on benchmarks sharply improves.
-2. Increase in AI applications across healthcare and transportation.
-3. Record private investment in generative AI, boosting productivity.
-4. USA leads AI model development; China closes performance gaps.
-5. Governments intensify AI regulation and clean-energy efforts.
-
-Source: [Stanford AI Index Report](https://hai.stanford.edu/ai-index/2025-ai-index-report)
-
----
-
-## Microsoft Article Insights on AI for 2025:
-1. Intelligent agents revolutionize workflows (via Microsoft Copilot).
-2. AI optimizing memory and emotional intelligence.
-3. Eco-friendly AI hardware driven by custom models (e.g., Microsoft's Orca).
-4. Customizable AI applications confront data hallucination risks.
-5. AI enabling breakthroughs in science.
-
-Source: [Microsoft AI Trends 2025](https://news.microsoft.com/source/features/ai/6-ai-trends-youll-see-more-of-in-2025/)
+1. AI agents performing complex reasoning and planning are gaining traction.
+2. Inference time compute enhancing real-time thinking and reasoning without retraining models.
+3. Emergence of extremely large parameters models (50 trillion) and small models for specific tasks on local devices.
+4. Advanced use cases for AI such as proactive optimization and solving complex customer service queries.
+5. AI models offering near infinite memory for continuous knowledge accumulation.
+6. Human-in-the-loop augmentation enhancing integration between humans and AI tasks for better synergy.
