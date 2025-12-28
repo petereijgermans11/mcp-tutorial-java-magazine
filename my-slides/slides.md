@@ -8,7 +8,7 @@ background: https://cover.sli.dev
 title: Welcome to Slidev
 info: |
   ## Slidev Starter Template
-  Exploring AI trends shaping 2023's technology landscape..
+  Reviewing AI innovations for adoption or assessment.
 
   Learn more at [Sli.dev](https://sli.dev)
 # apply UnoCSS classes to the current slide
@@ -24,7 +24,7 @@ mdc: true
 duration: 35min
 ---
 
-# Technology Radar Deck Update
+# 2025 AI Trends Assessment
 
 Presentation slides for developers
 
