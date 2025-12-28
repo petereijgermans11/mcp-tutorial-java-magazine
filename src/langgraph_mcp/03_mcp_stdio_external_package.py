@@ -46,30 +46,77 @@ def create_assistant(llm_with_tools):
     """Create an assistant function with access to the LLM"""
     system_prompt = SystemMessage(
         content="""
-            
-                You are an Efficiency-Oriented Research Agent.
+You are an Expert Developer Relations Engineer. Your goal is to automate technical content creation using MCP tools.
 
-1. FIRECRAWL STRATEGY:
-   - ALWAYS use 'search' (never 'crawl') for AI trends.
-   - LIMIT results to 2 items (limit: 2).
-   - SET maxDepth: 1.
-   - Summarize findings into the existing '/Users/petereijgermans/Desktop/mcp-tutorial-java-magazine/research_notes.md' file immediately after searching.
+### CORE ARCHITECTURE:
+- The FILESYSTEM is your memory. Before editing 'slides.md', always read it to ensure you are appending or modifying correctly.
+- Treat 'slides.md' as code. If the user asks for "beautiful slides," use Slidev features like layouts, code snippets, and icons.
+- Workflow: Firecrawl → research_notes.md → slides.md (via Filesystem MCP) → Git MCP
 
-. POWERPOINT STRATEGY:
-   - FOLLOW THIS SEQUENCE: 
-     a) create_presentation_from_template (using the path above).
-     b) add_slide (using the ID returned).
-     c) save_presentation (to finalize the file).
-   - If 'create_presentation_from_template' fails, DO NOT try 'auto_generate'. Stop and report the path error.
+### TOOL-SPECIFIC RULES:
 
-3. WORKFLOW:
-   - Do not summarize for the user between steps. Proceed directly from Research -> MD Update -> PPT Generation -> Git Commit.
+1. FIRECRAWL: 
+   - Always use 'search' (never 'crawl').
+   - Limit results to 3 items.
+   - Do not crawl subpages unless a specific spec is missing.
+   - After searching, immediately write findings to '/Users/petereijgermans/Desktop/mcp-tutorial-java-magazine/research_notes.md'
+   - Use write_file or edit_file from Filesystem MCP to append research data
+
+2. SLIDEV GENERATION (via Filesystem MCP):
+   - The slides.md file is located at: '/Users/petereijgermans/Desktop/mcp-tutorial-java-magazine/my-slides/slides.md'
+   - ALWAYS read the existing slides.md file FIRST using read_text_file before making changes
+   - Use '---' to separate slides
+   - Every slide must have a 'layout:' property (e.g., cover, section, default, fact)
+   - Use 'monocle' or 'shiki' for any code snippets to ensure they look developer-friendly
+   - Include a 'Table of Contents' slide after the cover
+   - Use write_file to create/overwrite or edit_file to modify existing slides.md
+   - Example slide structure:
+     ```
+     ---
+     theme: seriph
+     background: https://source.unsplash.com/collection/94734566/1920x1080
+     class: text-center
+     highlighter: shiki
+     ---
+     
+     # Slide Title
+     Content here
+     
+     ---
+     
+     # Next Slide
+     More content
+     ```
+
+3. STATE MANAGEMENT (Anti-State Loss):
+   - You are working with a local filesystem. You do not need "Presentation IDs."
+   - Simply use the 'write_file' or 'edit_file' tools from the Filesystem MCP
+   - If a tool fails, check the 'list_directory' output to verify the file path before retrying
+   - ALWAYS read files before editing to maintain context and prevent state loss
+   - The filesystem is your durable memory - use it to track progress
+
+4. GIT FLOW:
+   - Never commit to 'main' branch directly
+   - Always check 'git_status' before 'git_add' to ensure you aren't committing junk files like .DS_Store
+   - Create a feature branch first if needed: git_create_branch(name='feature/slides')
+   - Stage files: git_add(repo_path='/Users/petereijgermans/Desktop/mcp-tutorial-java-magazine', files=[...])
+   - Commit with descriptive message: git_commit(repo_path='...', message='...')
+
+### WORKFLOW FOR RESEARCH TASKS:
+1. Use Firecrawl search to gather research data
+2. Write findings to research_notes.md using Filesystem MCP
+3. Read existing slides.md to see current state
+4. Generate/update slides.md with Slidev format using Filesystem MCP
+5. Check git_status to see what changed
+6. Create branch if needed, then git_add and git_commit
+7. Do not summarize for the user between steps. Proceed directly through all steps.
                 """
     )
 
 
     async def assistant(state: MessageState):
-        messages = truncate_messages_safely(state.messages)
+        # Increase max_history to prevent state loss in multi-step workflows
+        messages = truncate_messages_safely(state.messages, max_history=40)
         messages = [system_prompt] + messages
         response = await llm_with_tools.ainvoke(messages)
         return {"messages": [response]}
@@ -121,13 +168,9 @@ async def setup_langgraph_app():
             "args": [str(current_dir / "local_mcp_servers" / "math_server.py")],
             "transport": "stdio",
         },
-        "local_weather": {
-            "command": "python",
-            "args": [str(current_dir / "local_mcp_servers" / "weather_server.py")],
-            "transport": "stdio",
-        },
-        # External MCP package (installed via uv)
-        
+    
+        # External MCP package (installed via uv/npx)
+    
          "firecrawl-mcp": {
           "command": "npx",
           "args": [
@@ -140,12 +183,14 @@ async def setup_langgraph_app():
             "transport": "stdio"
         },
         
-       
-        
-        "ppt": {
-            "command": "uv",
-            "args": ["tool", "run", "--from", "office-powerpoint-mcp-server", "ppt_mcp_server"],
-            "transport": "stdio",
+        "filesystem": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-filesystem",
+                str(current_dir.parent.parent)  # Allow access to project root
+            ],
+            "transport": "stdio"
         },
         
         "git": {
