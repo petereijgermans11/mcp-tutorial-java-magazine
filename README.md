@@ -91,7 +91,6 @@ This repository contains several examples demonstrating MCP integration:
 - **`01_langgraph_agent_no_mcp.py`** - Basic LangGraph agent with local tools (no MCP)
 - **`02_mcp_stdio_local.py`** - LangGraph agent with local MCP servers via stdio transport
 - **`03_mcp_stdio_external_package.py`** - LangGraph agent with external MCP packages via stdio (includes FastAPI web interface)
-- **`04_mcp_http_external_package.py`** - LangGraph agent with remote HTTP MCP servers + local servers (includes FastAPI web interface with Supabase integration)
 
 ## Resources
 - [MCP Servers Directory](https://mcpservers.org/) - Find more MCP servers
