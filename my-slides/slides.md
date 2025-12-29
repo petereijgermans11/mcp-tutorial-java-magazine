@@ -3,7 +3,7 @@ theme: '@slidev/theme-seriph'
 layout: cover
 ---
 
-# AI Trends 2025
+# Setting Up Agentic Workflows in Python
 
 ---
 layout: default
@@ -11,35 +11,72 @@ layout: default
 
 # Table of Contents
 
-1. The State of AI in 2025
-2. Stanford 2025 AI Index Report
-3. IBM: Trends Shaping the Future of AI
-4. Morgan Stanley's AI Frontiers
+- Building Agentic Workflows in Python with AWS
+- Parallel Agentic Workflows in Python
+- Agentic Workflows with Vanilla Python
+- Autonomous Systems in Python
+- Agent UI Trends
 
 ---
 layout: default
 ---
 
-# The State of AI in 2025
-Key insights include organizations still in the experimenting or piloting phases with AI; high curiosity around AI agents; divergence in employment impact expectations; redesigning workflows as a key factor for AI success; and the varying benefits AI brings in innovation, efficiency, and revenue generation across industries.
+# Building Agentic Workflows in Python with AWS
+A hands-on walkthrough focused on integrating Amazon Bedrock for scalable hosting environments.
 
+Key insights: serverless deployment, tool orchestration using BedrockAgentCore.
+
+```python
+from bedrock_agentcore.runtime import BedrockAgentCoreApp
+
+app = BedrockAgentCoreApp()
+@app.entrypoint
+def run_task(payload):
+    return agent(payload)
+if __name__ == "__main__":
+    app.run()
+```
 ---
 layout: default
 ---
 
-# Stanford 2025 AI Index Report
-Highlights advancements in AI performance benchmarks such as GPQA and SWE-bench, increases in AI embedding across sectors like healthcare and transportation, private investment in AI skyrocketing, and the efficiency of smaller, affordable AI models closing performance gaps with larger ones.
+# Parallel Agentic Workflows in Python
+Tutorial using Python asyncio for fast and accurate agent operations.
 
+Reduction in latency by utilizing asynchronous API calls.
+
+```python
+import asyncio
+import aiohttp
+
+async def fetch_url(url):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            return await response.text()
+
+urls = ['https://example.com']
+responses = asyncio.run(asyncio.gather(*(fetch_url(url) for url in urls)))
+```
 ---
 layout: default
 ---
 
-# IBM: Trends Shaping the Future of AI
-Discusses agentic AI's progression, multimodal AI integration of text, voice, and visuals; advances in regulations and ethical guidelines such as the EU AI Act; increased use of AI in automation and decision-making tasks, and its integration in industries with custom AI tools accessible to non-experts.
+# Agentic Workflows with Vanilla Python
+Focus on simplicity and reducing complexity by eliminating frameworks.
 
+Core logic using Python alone.
 ---
 layout: default
 ---
 
-# Morgan Stanley's AI Frontiers
-Explores key trends like increasing AI reasoning capabilities, advancements in frontier models combining multimodal data, tailored AI tools for enterprises, agentic AI technologies, and security measures in sensitive sectors like financial services.
+# Autonomous Systems in Python
+Design principles such as perception, decision-making, and action implementation.
+
+Use cases discussed include customer bots and IoT orchestration.
+---
+layout: default
+---
+
+# Agent UI Trends
+Insights into MCP design challenges and integrating workflows with tangible UI design frameworks.
+---
