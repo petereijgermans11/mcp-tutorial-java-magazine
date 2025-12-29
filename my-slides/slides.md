@@ -1,54 +1,45 @@
 ---
 theme: '@slidev/theme-seriph'
-background: 'https://source.unsplash.com/1600x900/?technology,artificial-intelligence'
 layout: cover
 ---
 
 # AI Trends 2025
 
 ---
-layout: section
+layout: default
 ---
 
 # Table of Contents
 
-1. The State of AI: Global Survey 2025 - McKinsey
-2. The 2025 AI Index Report | Stanford HAI
-3. The Future of Artificial Intelligence | IBM
-4. 5 AI Trends Shaping Innovation and ROI in 2025 | Morgan Stanley
+1. The State of AI in 2025
+2. Stanford 2025 AI Index Report
+3. IBM: Trends Shaping the Future of AI
+4. Morgan Stanley's AI Frontiers
 
 ---
 layout: default
 ---
 
-# The State of AI: Global Survey 2025 - McKinsey 
-📊
-
-The McKinsey Survey highlights that most organizations are in the piloting phase of AI deployment, with only one-third scaling their programs. Notable trends include the exploration of 'agentic AI,' integration into IT functions, and driving innovation while redesigning workflows.
+# The State of AI in 2025
+Key insights include organizations still in the experimenting or piloting phases with AI; high curiosity around AI agents; divergence in employment impact expectations; redesigning workflows as a key factor for AI success; and the varying benefits AI brings in innovation, efficiency, and revenue generation across industries.
 
 ---
 layout: default
 ---
 
-# The 2025 AI Index Report | Stanford HAI
-🚗
-
-Stanford's report emphasizes AI's improvement in benchmarks, integration into daily life (e.g., FDA-approved medical devices, autonomous vehicles), its affordability, and energy efficiency improvements. The potential for widespread AI adoption and emerging ethical frameworks are discussed.
+# Stanford 2025 AI Index Report
+Highlights advancements in AI performance benchmarks such as GPQA and SWE-bench, increases in AI embedding across sectors like healthcare and transportation, private investment in AI skyrocketing, and the efficiency of smaller, affordable AI models closing performance gaps with larger ones.
 
 ---
 layout: default
 ---
 
-# The Future of Artificial Intelligence | IBM
-🤖
-
-IBM elaborates on multimodal AI advancements, democratization of tools for non-experts, and growing emphasis on agentic AI systems for autonomous operations across industries. Quantum AI and new architectures predict the evolution of efficient and collaborative models.
+# IBM: Trends Shaping the Future of AI
+Discusses agentic AI's progression, multimodal AI integration of text, voice, and visuals; advances in regulations and ethical guidelines such as the EU AI Act; increased use of AI in automation and decision-making tasks, and its integration in industries with custom AI tools accessible to non-experts.
 
 ---
 layout: default
 ---
 
-# 5 AI Trends Shaping Innovation and ROI in 2025 | Morgan Stanley
-💼
-
-Morgan Stanley identifies five trends in AI, including advancements in AI reasoning, emphasis on enterprise-tailored solutions like custom silicon and hyperscale cloud migrations, and a focus on agentic computing for productivity and decision-making across industries.
+# Morgan Stanley's AI Frontiers
+Explores key trends like increasing AI reasoning capabilities, advancements in frontier models combining multimodal data, tailored AI tools for enterprises, agentic AI technologies, and security measures in sensitive sectors like financial services.
