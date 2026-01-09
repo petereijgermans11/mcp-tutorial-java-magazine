@@ -50,6 +50,14 @@ Adding new packages:
 poetry add package-name
 (No need for lock/install - poetry add does it automatically)
 
+### setup Slidev for slides
+
+To start the slide show:
+
+- `npm install`
+- `npm run dev`
+- visit <http://localhost:3030>
+
 ## MCP Architecture
 
 ![MCP Architecture](resources/readme_mcp_explanation.png)

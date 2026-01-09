@@ -63,3 +63,4 @@ echo "📁 Slides location: $SLIDES_DIR/slides.md"
 echo "💡 To start the live preview, run: cd $SLIDES_DIR && npm run dev"
 echo "🌐 The slides will be available at: http://localhost:3030"
 
+

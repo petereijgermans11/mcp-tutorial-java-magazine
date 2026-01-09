@@ -63,7 +63,7 @@ User Prompt → Firecrawl MCP → research_notes.md → Filesystem MCP → slide
 
 3. **Start the LangGraph agent:**
    ```bash
-   python src/langgraph_mcp/03_mcp_stdio_external_package.py
+   poetry run python src/langgraph_mcp/03_mcp_stdio_external_package.py
    ```
 
 4. **Use the web interface at:** `http://localhost:8000`

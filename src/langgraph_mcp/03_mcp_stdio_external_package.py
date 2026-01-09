@@ -68,7 +68,7 @@ You are an Expert Developer Relations Engineer automating technical content crea
         - Frontmatter (theme: '@slidev/theme-seriph', background, etc.) followed by '---'
         - Cover slide: "# AI Trends 2025" followed by '---'
         - TOC slide listing all numbered items followed by '---'
-        - ONE slide per numbered item: title from item, content is EXACT text from item (use 1 emoji per title/slide)
+        - ONE slide per numbered item: title from item, content is EXACT text from item
         - CODE EXAMPLES: If user prompt mentions "code examples", "runnable code", "Python", "JavaScript", "developer-focused", or "demonstrates":
           * Add code blocks to slides demonstrating the AI trend
           * Use Slidev code syntax: ```python or ```javascript with proper highlighting
